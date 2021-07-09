@@ -46,7 +46,8 @@
         <b>${massage.tag}</b>
     </div>
     <div class="card-footer text-muted">
-        ${massage.userName}
+        ${massage.userName}<br/>
+        <b>${massage.current_date}</b>
     </div>
     <#if massage.userName = sec.name || sec.isAdmin>
     <div class="row m-0 mb-2">

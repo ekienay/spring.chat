@@ -13,7 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -54,6 +57,9 @@ public class MainController {
             file.transferTo(new File(uploadPath+"/"+result));
             massage.setFileName(result);
         }
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("dd-MM HH:mm");
+        massage.setCurrent_date(df.format(date));
         massageRepo.save(massage);
         Iterable<Massage> massages = massageRepo.findAll();
         model.addAttribute("massages", massages);
@@ -68,6 +74,7 @@ public class MainController {
         model.addAttribute("massages",massageArrayList);
         return "edit";
     }
+
     @PostMapping("/{massage.id}/edit")
     public String edit(@PathVariable(value = "massage.id") Long id,@RequestParam String text,@RequestParam String tag,Model model) throws IOException {
         Massage massage = massageRepo.findById(id).orElseThrow();
