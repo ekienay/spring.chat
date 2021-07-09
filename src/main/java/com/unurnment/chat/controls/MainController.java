@@ -15,10 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Controller
@@ -59,6 +56,7 @@ public class MainController {
         }
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("dd-MM HH:mm");
+        df.setTimeZone(TimeZone.getTimeZone("GMT+03"));
         massage.setCurrent_date(df.format(date));
         massageRepo.save(massage);
         Iterable<Massage> massages = massageRepo.findAll();
